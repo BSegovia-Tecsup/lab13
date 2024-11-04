@@ -4,9 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
@@ -21,7 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.lab13.ui.theme.Lab13Theme
 
-class AnimacionVisuvilidad : ComponentActivity() {
+class Animacionv2 : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -30,22 +29,28 @@ class AnimacionVisuvilidad : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    AnimatedVisibilityExample(onNavigate = { navigateToAnimacionv2() })
+                    ColorChangeExample { navigateToAnimacionVisuvilidad() }
                 }
             }
         }
     }
 
-    // Método para navegar a Animacionv2
-    private fun navigateToAnimacionv2() {
-        val intent = Intent(this, Animacionv2::class.java)
+    // Método para navegar a AnimacionVisuvilidad
+    private fun navigateToAnimacionVisuvilidad() {
+        val intent = Intent(this, AnimacionVisuvilidad::class.java)
         startActivity(intent)
     }
 }
 
 @Composable
-fun AnimatedVisibilityExample(onNavigate: () -> Unit) {
-    var isVisible by remember { mutableStateOf(false) }
+fun ColorChangeExample(onNavigate: () -> Unit) {
+    var isBlue by remember { mutableStateOf(true) }
+
+    // Define el color de fondo con animación
+    val backgroundColor by animateColorAsState(
+        targetValue = if (isBlue) Color.Blue else Color.Green,
+        animationSpec = spring() // Puedes cambiar a tween() o definir duración y otros parámetros
+    )
 
     Column(
         modifier = Modifier
@@ -54,36 +59,33 @@ fun AnimatedVisibilityExample(onNavigate: () -> Unit) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Button(onClick = { isVisible = !isVisible }) {
-            Text(text = if (isVisible) "Ocultar" else "Mostrar")
+        // Botón para cambiar el color
+        Button(onClick = { isBlue = !isBlue }) {
+            Text(text = "Cambiar Color")
         }
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        AnimatedVisibility(
-            visible = isVisible,
-            enter = fadeIn(),
-            exit = fadeOut()
-        ) {
-            Box(
-                modifier = Modifier
-                    .size(100.dp)
-                    .background(Color.Red)
-            )
-        }
+        // Cuadro con fondo de color animado
+        Box(
+            modifier = Modifier
+                .size(100.dp)
+                .background(backgroundColor)
+        )
 
         Spacer(modifier = Modifier.height(16.dp))
 
+        // Botón adicional para redirigir a AnimacionVisuvilidad
         Button(onClick = onNavigate) {
-            Text(text = "Ir a Animacionv2")
+            Text(text = "Ir a AnimacionVisuvilidad")
         }
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun AnimatedVisibilityPreview() {
+fun ColorChangePreview() {
     Lab13Theme {
-        AnimatedVisibilityExample(onNavigate = {})
+        ColorChangeExample(onNavigate = {})
     }
 }
