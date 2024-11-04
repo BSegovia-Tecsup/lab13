@@ -30,17 +30,11 @@ class Animacionv3 : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     SizeAndPositionAnimation(
-                        onNavigateToAnimacionv2 = { navigateToAnimacionv2() },
                         onNavigateToAnimacionVisuvilidad = { navigateToAnimacionVisuvilidad() }
                     )
                 }
             }
         }
-    }
-
-    private fun navigateToAnimacionv2() {
-        val intent = Intent(this, Animacionv2::class.java)
-        startActivity(intent)
     }
 
     private fun navigateToAnimacionVisuvilidad() {
@@ -50,7 +44,7 @@ class Animacionv3 : ComponentActivity() {
 }
 
 @Composable
-fun SizeAndPositionAnimation(onNavigateToAnimacionv2: () -> Unit, onNavigateToAnimacionVisuvilidad: () -> Unit) {
+fun SizeAndPositionAnimation(onNavigateToAnimacionVisuvilidad: () -> Unit) {
     var isSmall by remember { mutableStateOf(true) }
     val size: Dp by animateDpAsState(targetValue = if (isSmall) 100.dp else 200.dp)
     val offsetX: Dp by animateDpAsState(targetValue = if (isSmall) 0.dp else 150.dp)
@@ -76,13 +70,6 @@ fun SizeAndPositionAnimation(onNavigateToAnimacionv2: () -> Unit, onNavigateToAn
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Botón para ir a Animacionv2
-        Button(onClick = onNavigateToAnimacionv2) {
-            Text(text = "Ir a Animacionv2")
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
         // Botón para ir a AnimacionVisuvilidad
         Button(onClick = onNavigateToAnimacionVisuvilidad) {
             Text(text = "Ir a AnimacionVisuvilidad")
@@ -94,6 +81,6 @@ fun SizeAndPositionAnimation(onNavigateToAnimacionv2: () -> Unit, onNavigateToAn
 @Composable
 fun SizeAndPositionPreview() {
     Lab13Theme {
-        SizeAndPositionAnimation(onNavigateToAnimacionv2 = {}, onNavigateToAnimacionVisuvilidad = {})
+        SizeAndPositionAnimation(onNavigateToAnimacionVisuvilidad = {})
     }
 }

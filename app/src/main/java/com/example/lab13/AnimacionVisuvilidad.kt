@@ -32,7 +32,8 @@ class AnimacionVisuvilidad : ComponentActivity() {
                 ) {
                     AnimatedVisibilityExample(
                         onNavigateToAnimacionv2 = { navigateToAnimacionv2() },
-                        onNavigateToAnimacionv3 = { navigateToAnimacionv3() } // Nueva navegación
+                        onNavigateToAnimacionv3 = { navigateToAnimacionv3() },
+                        onNavigateToAnimacionv4 = { navigateToAnimacionv4() } // Nueva navegación
                     )
                 }
             }
@@ -50,10 +51,20 @@ class AnimacionVisuvilidad : ComponentActivity() {
         val intent = Intent(this, Animacionv3::class.java)
         startActivity(intent)
     }
+
+    // Método para navegar a Animacionv4
+    private fun navigateToAnimacionv4() {
+        val intent = Intent(this, Animacionv4::class.java)
+        startActivity(intent)
+    }
 }
 
 @Composable
-fun AnimatedVisibilityExample(onNavigateToAnimacionv2: () -> Unit, onNavigateToAnimacionv3: () -> Unit) {
+fun AnimatedVisibilityExample(
+    onNavigateToAnimacionv2: () -> Unit,
+    onNavigateToAnimacionv3: () -> Unit,
+    onNavigateToAnimacionv4: () -> Unit // Parámetro para la nueva navegación
+) {
     var isVisible by remember { mutableStateOf(false) }
 
     Column(
@@ -90,9 +101,16 @@ fun AnimatedVisibilityExample(onNavigateToAnimacionv2: () -> Unit, onNavigateToA
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Nuevo botón para ir a Animacionv3
+        // Botón para ir a Animacionv3
         Button(onClick = onNavigateToAnimacionv3) {
             Text(text = "Ir a Animacionv3")
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Nuevo botón para ir a Animacionv4
+        Button(onClick = onNavigateToAnimacionv4) {
+            Text(text = "Ir a Animacionv4")
         }
     }
 }
@@ -101,6 +119,6 @@ fun AnimatedVisibilityExample(onNavigateToAnimacionv2: () -> Unit, onNavigateToA
 @Composable
 fun AnimatedVisibilityPreview() {
     Lab13Theme {
-        AnimatedVisibilityExample(onNavigateToAnimacionv2 = {}, onNavigateToAnimacionv3 = {})
+        AnimatedVisibilityExample(onNavigateToAnimacionv2 = {}, onNavigateToAnimacionv3 = {}, onNavigateToAnimacionv4 = {})
     }
 }
