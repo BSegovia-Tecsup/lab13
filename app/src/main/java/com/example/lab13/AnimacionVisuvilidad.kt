@@ -41,25 +41,21 @@ class AnimacionVisuvilidad : ComponentActivity() {
         }
     }
 
-    // Método para navegar a Animacionv2
     private fun navigateToAnimacionv2() {
         val intent = Intent(this, Animacionv2::class.java)
         startActivity(intent)
     }
 
-    // Método para navegar a Animacionv3
     private fun navigateToAnimacionv3() {
         val intent = Intent(this, Animacionv3::class.java)
         startActivity(intent)
     }
 
-    // Método para navegar a Animacionv4
     private fun navigateToAnimacionv4() {
         val intent = Intent(this, Animacionv4::class.java)
         startActivity(intent)
     }
 
-    // Método para navegar a Animacionv5
     private fun navigateToAnimacionv5() {
         val intent = Intent(this, Animacionv5::class.java)
         startActivity(intent)
@@ -70,8 +66,8 @@ class AnimacionVisuvilidad : ComponentActivity() {
 fun AnimatedVisibilityExample(
     onNavigateToAnimacionv2: () -> Unit,
     onNavigateToAnimacionv3: () -> Unit,
-    onNavigateToAnimacionv4: () -> Unit, // Parámetro para la nueva navegación
-    onNavigateToAnimacionv5: () -> Unit // Parámetro para la nueva navegación a Animacionv5
+    onNavigateToAnimacionv4: () -> Unit,
+    onNavigateToAnimacionv5: () -> Unit
 ) {
     var isVisible by remember { mutableStateOf(false) }
 
@@ -102,28 +98,24 @@ fun AnimatedVisibilityExample(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Botón para ir a Animacionv2
         Button(onClick = onNavigateToAnimacionv2) {
             Text(text = "Ir a Animacionv2")
         }
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Botón para ir a Animacionv3
         Button(onClick = onNavigateToAnimacionv3) {
             Text(text = "Ir a Animacionv3")
         }
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Nuevo botón para ir a Animacionv4
         Button(onClick = onNavigateToAnimacionv4) {
             Text(text = "Ir a Animacionv4")
         }
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Nuevo botón para ir a Animacionv5
         Button(onClick = onNavigateToAnimacionv5) {
             Text(text = "Ir a Animacionv5")
         }

@@ -35,7 +35,6 @@ class Animacionv2 : ComponentActivity() {
         }
     }
 
-    // Método para navegar a AnimacionVisuvilidad
     private fun navigateToAnimacionVisuvilidad() {
         val intent = Intent(this, AnimacionVisuvilidad::class.java)
         startActivity(intent)
@@ -46,7 +45,6 @@ class Animacionv2 : ComponentActivity() {
 fun ColorChangeExample(onNavigate: () -> Unit) {
     var isBlue by remember { mutableStateOf(true) }
 
-    // Define el color de fondo con animación
     val backgroundColor by animateColorAsState(
         targetValue = if (isBlue) Color.Blue else Color.Green,
         animationSpec = spring() // Puedes cambiar a tween() o definir duración y otros parámetros
@@ -59,14 +57,12 @@ fun ColorChangeExample(onNavigate: () -> Unit) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Botón para cambiar el color
         Button(onClick = { isBlue = !isBlue }) {
             Text(text = "Cambiar Color")
         }
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Cuadro con fondo de color animado
         Box(
             modifier = Modifier
                 .size(100.dp)
@@ -75,7 +71,6 @@ fun ColorChangeExample(onNavigate: () -> Unit) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Botón adicional para redirigir a AnimacionVisuvilidad
         Button(onClick = onNavigate) {
             Text(text = "Ir a AnimacionVisuvilidad")
         }
